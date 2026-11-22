@@ -21,10 +21,9 @@ TRAIN_RANGES = {
     "Fine Aggregate": (594.0, 992.6), "Age": (1.0, 365.0),
 }
 
-st.set_page_config(page_title="Concrete Strength Predictor", page_icon="🧱", layout="centered")
+st.set_page_config(page_title="Concrete Strength Predictor", page_icon="🪨", layout="centered")
 st.title("Concrete Compressive Strength Predictor")
-st.caption("Educational prototype | HistGradientBoosting regression model | Output in MPa")
-st.warning("This is a classroom prototype, not an approved engineering design or quality-control tool. Confirm strength using required laboratory tests and qualified engineering review.")
+st.caption("Educational prototype(ML assgnment#1) | HistGradientBoosting regression model | Output in MPa")
 
 @st.cache_resource
 def load_model():
@@ -57,9 +56,9 @@ if submitted:
             if val < lo or val > hi:
                 outside.append(f"{name}: {val:g} outside observed range [{lo:g}, {hi:g}]")
         if outside:
-            st.warning("One or more inputs are outside the observed training-data range. This is extrapolation and may be unreliable.\n\n" + "\n".join(outside))
+            st.warning("One or more inputs are outside the observed training-data range. This may be unreliable.\n\n" + "\n".join(outside))
         else:
-            st.info("All inputs fall within the observed minimum-to-maximum ranges of the dataset. This does not guarantee accuracy for a new plant, material source, or testing procedure.")
+            st.info("All inputs fall within the observed minimum-to-maximum ranges of the dataset. ")
 
 st.divider()
 st.caption("Model: HistGradientBoostingRegressor | Training data: 854 rows after model selection | Test RMSE: 3.92 MPa | Test R2: 0.935")
